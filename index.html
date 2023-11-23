@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player Design - Easy tutorials</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .music-player{
+            background: #ffe0e5;
+            width: 400px;
+            padding: 25px 35px;
+            text-align: center;
+            height:  600px;
+        }
+
+        nav{
+           display: flex;
+           justify-content: space-between;
+           margin-bottom: 30px;
+        }
+
+        nav .circle{
+   border-radius:  50%;
+   width: 40px;
+   height: 40px;
+   line-height: 40px;
+   background-color: #fff;
+   color: #f53192;
+   box-shadow:  0 5px 10px rgba(255,26,26,0.22);
+        }
+  .song-img{
+    width: 220px;
+    border-radius:  50%;
+    border: 8px solid #fff;
+    box-shadow: 0 10px 60px rgba(255,26,26,0.22);
+    height:200px;
+  }
+
+  #progress{
+    -webkit-appearance:  none;
+    width: 100%;
+    height:  6px;
+    background: #f53192;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 40px 0;
+  }
+
+  #progress::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background: #f53192;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    box-shadow: 0 5px 5px rgba(255,26,26,0.22))
+  }
+
+  .controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .controls div{
+    width:60px;
+    height: 60px;
+    margin: 20px;
+    background: #fff;
+    display:  inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f53192;
+    box-shadow: 0 10px 20px rgba(255,26,26,0.22);
+    cursor: pointer;
+  }
+
+  .controls div:nth-child(2){
+    transform:  scale(1.5);
+    background: #f53192;
+    color: #fff;
+  }
+
+  
+    </style>
+
+    <script src="https://kit.fontawesome.com/fc0fcd409c.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="music-player">
+            <nav>
+                <div class="circle">
+                     <i class="fa-solid fa-angle-left"></i>
+                </div>
+
+
+
+               <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+           </div>
+               
+            </nav>
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/94b68192-e943-4d00-a35b-a48c261367d4/deyjsra-22065c4d-f960-4c48-8c3b-922f81ca8565.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk0YjY4MTkyLWU5NDMtNGQwMC1hMzViLWE0OGMyNjEzNjdkNFwvZGV5anNyYS0yMjA2NWM0ZC1mOTYwLTRjNDgtOGMzYi05MjJmODFjYTg1NjUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ncAm6KbevmVmmMQYsepBvNaB8c4QOHhG1Nj-2y44Ffw" alt=""  class = "song-img">
+        <h1>Sunflower</h1>
+        <p>Post Malon ft. Swaa Lee</p>
+
+        <audio   id = "song">
+            <source  src = "post.mp3" type = "audio/mpeg">
+
+        </audio>
+
+        
+     <input type="range" value = "0" id= "progress">
+       
+     <div class="controls">
+        <div><i class="fa-solid fa-backward"></i></div>
+        <div onclick="playPause()"><i class="fa-solid fa-play"  id = "ctrlIcon"></i></div>
+        <div><i class="fa-solid fa-forward"></i></div>
+     </div>
+
+
+
+        </div>
+      
+    </div>
+
+    progress.onchange = function(){
+        song.play();
+        song.currentTime = progress.value;
+    }
+    
+    <script>
+
+        let progress = document.getElementById("progress");
+       let song = document.getElementById("song");
+       let ctrlIcon = document.getElementById("ctrlIcon");
+
+       song.onloadedmetadata = function(){
+        progress.max = song.duration;
+        progress.value = song.currentTime;
+       }
+
+       function  playPause(){
+        if(ctrlIcon.classList.contains("fa-pause")){
+            song.pause();
+            ctrl.classList.add("fa-pause");
+            ctrl.classList.remove("fa-play");
+        }
+        else
+        {
+            song.play();
+            ctrlIcon.classList.add("fa-pause");
+            ctrlIcon.classList.remove("fa-play");
+        }
+       }
+
+       if(song.play() )
+       {
+        setInterval(()=>{
+            progress.value = song.currentTime;
+        },500);
+       }
+
+       progress.onchange = function(){
+        song.play();
+        song.currentTime = progress.value;
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+  
+       }
+    </script>
+</body>
+</html>
